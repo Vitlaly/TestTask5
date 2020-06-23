@@ -25,6 +25,11 @@ class User(db.Model, UserMixin):
 def load_user(id):
     return User.query.get(int(id))
 
+mtm = db.Table('mtm',
+    db.Column('book_id', db.Integer, db.ForeignKey('book.id'), primary_key=True),
+    db.Column('author_id', db.Integer, db.ForeignKey('author.id'), primary_key=True)
+)
+
 
 class Book(db.Model):
     __tablename__ = 'book'
@@ -33,7 +38,12 @@ class Book(db.Model):
     author = db.Column(db.String(250), nullable=False)
     genre = db.Column(db.String(250))
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    mtm = db.relationship('Author', secondary=mtm, lazy='subquery',
+                           backref = db.backref('books', lazy=True))
 
+class Author(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    authorname = db.Column(db.String(250), nullable=False)
 
 
 
