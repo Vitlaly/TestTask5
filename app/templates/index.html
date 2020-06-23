@@ -1,4 +1,3 @@
-
 <html>
 <body>
    <a href="{{url_for('logout')}}">
@@ -11,7 +10,7 @@
    </a>
    <ol>
        {% for book in books %}
-       <li> НАЗВА // {{book.title}}// — АВТОР //{{book.author}}// Автор поста //{{user.username}} </li>
+       <li> НАЗВА // {{book.title}}// — АВТОР //{{author.authorname}}// Автор поста //{{user.username}} </li>
        <a href="{{url_for('editBook', book_id = book.id )}}">
            Изменить
        </a>
