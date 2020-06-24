@@ -10,7 +10,7 @@ from app.models import User, Book, Author
 @login_required
 def index():
     books = db.session.query(Book).all()
-    author= db.session.query(Author).all()
+    author= db.session.query(Author).first()
     user= db.session.query(User).first()
     return render_template("index.html", books=books, author=author, user=user)
 
